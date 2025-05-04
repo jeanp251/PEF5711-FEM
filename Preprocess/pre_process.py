@@ -54,7 +54,8 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
                                         xytext = (x_node - 7.1e-2 * prop_dimension, y_node + 7e-3 * prop_dimension),
                                         color = 'red')
                             ax.arrow(x_node - 7.1e-2 * prop_dimension, 
-                                     y_node, 6.36e-2 * prop_dimension, 
+                                     y_node, 
+                                     6.36e-2 * prop_dimension, 
                                      0,
                                      width = arrow_width,
                                      color = 'red',
@@ -63,10 +64,11 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
                         else: # Negative Fx
                             ax.annotate(str(abs(nodal_force)) + "N",
                                         xy = (x_node, y_node),
-                                        xytext ="" (x_node + 7.1e-2 * prop_dimension, y_node + 7e-3 * prop_dimension),
+                                        xytext = (x_node + 7.1e-2 * prop_dimension, y_node + 7e-3 * prop_dimension),
                                         color = 'red')
                             ax.arrow(x_node + 7.1e-2 * prop_dimension, 
-                                     y_node, -6.36e-2 * prop_dimension,
+                                     y_node,
+                                     -6.36e-2 * prop_dimension,
                                      0,
                                      width = arrow_width,
                                      color = 'red',
@@ -77,7 +79,10 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
                                         xy = (x_node, y_node),
                                         xytext = (x_node + 7e-3 * prop_dimension, y_node + 7.1e-2 * prop_dimension),
                                         color = 'red')
-                            ax.arrow(x_node, y_node + 7e-3 * prop_dimension, 0, 6.36e-2 * prop_dimension,
+                            ax.arrow(x_node, 
+                                     y_node + 7e-3 * prop_dimension, 
+                                     0, 
+                                     6.36e-2 * prop_dimension,
                                      width = arrow_width,
                                      color = 'red',
                                      length_includes_head = True)
@@ -86,7 +91,10 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
                                         xy = (x_node, y_node),
                                         xytext = (x_node + 7e-3 * prop_dimension, y_node + 7.1e-2 * prop_dimension),
                                         color = 'red')
-                            ax.arrow(x_node, y_node + 6.36e-2 * prop_dimension, 0, -6.36e-2 * prop_dimension,
+                            ax.arrow(x_node, 
+                                     y_node + 6.36e-2 * prop_dimension, 
+                                     0, 
+                                     -6.36e-2 * prop_dimension,
                                      width = arrow_width,
                                      color = 'red',
                                      length_includes_head = True) 

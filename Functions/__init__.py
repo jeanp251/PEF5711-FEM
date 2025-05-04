@@ -3,3 +3,4 @@ from .assemble_stiffness import *
 from .update_ENL import *
 from .solve_system import *
 from .update_results_ENL import *
+from .get_internal_forces import *

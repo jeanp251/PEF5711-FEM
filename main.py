@@ -6,32 +6,12 @@ import Posprocess
 if __name__ == "__main__":
 
     # INPUT DATA
-    # problem = "example-1"
+    problem = "example-1"
 
     E = 10**6 # MPa
     A = 0.01 # m^2
 
-    node_list = np.array([[0, 0], 
-                        [1, 0],
-                        [0.5, 1]])
-
-    element_list = np.array([[1, 2], 
-                            [2, 3], 
-                            [3, 1]])
-    
-    # -1: Fixed
-    # +1: Free
-    boundary_conditions = np.array([[-1, -1],
-                                    [1, -1],
-                                    [1, 1]])
-
-    external_loads = np.array([[0, 0], 
-                            [0, 0], 
-                            [0, -20.0]])
-
-    displacements = np.array([[0, 0], 
-                            [0, 0],
-                            [0, 0]])
+    (node_list, boundary_conditions, element_list, external_loads, displacements) = Preprocess.get_input_data(problem)
 
     Preprocess.pre_process(node_list, boundary_conditions, element_list, external_loads)
     
@@ -47,11 +27,11 @@ if __name__ == "__main__":
 
     ENL = Functions.update_results_ENL(ENL, U_u, F_u, node_list)
 
-    np.set_printoptions(precision = 3, suppress = True)
-    print(ENL)
-    print(U_u)
-    print(F_u)
-    print(ENL[:, 8:10])
+    internal_forces = Functions.get_internal_forces(ENL, node_list, element_list, E, A)
 
-    scale_factor = 1
-    Posprocess.pos_process.plot_deformation_truss(ENL, node_list, scale_factor)
+    # np.set_printoptions(precision = 3, suppress = True)
+    # print(internal_forces)
+    
+    scale_factor = 100
+    Posprocess.plot_deformation_truss(ENL, node_list, element_list, scale_factor)
+    Posprocess.plot_deformation_colorbar_truss(ENL, node_list, element_list, scale_factor)
