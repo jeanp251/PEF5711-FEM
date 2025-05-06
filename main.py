@@ -6,7 +6,7 @@ import Posprocess
 if __name__ == "__main__":
 
     # INPUT DATA
-    problem = "example-1"
+    problem = "example-2"
 
     E = 10**6 # MPa
     A = 0.01 # m^2
