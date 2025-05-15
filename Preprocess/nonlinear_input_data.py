@@ -1,7 +1,7 @@
 import numpy as np
 
-def get_input_data(problem):
-    path = "./Examples/"
+def get_nonlinear_input_data(problem):
+    path = "./Examples/Nonlinear/"
     # ----------------------------------------------------------------------------
     # NODE LIST
     # ----------------------------------------------------------------------------

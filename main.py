@@ -1,4 +1,3 @@
-import numpy as np
 import Preprocess
 import Functions
 import Posprocess
