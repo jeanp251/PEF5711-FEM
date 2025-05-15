@@ -3,12 +3,11 @@ import Preprocess
 import Functions
 import Posprocess
 
-
 if __name__ == "__main__":
-    problem = "example-1"
+    problem = "example-2"
 
-    E = 70 # [GPa]
-    A = 645.2 # [mm^2] 
+    E = 205000e6 # [Pa]
+    A = 12.54e-4 # [m^2] 
 
     (node_list, boundary_conditions, element_list, external_loads, displacements) = Preprocess.get_nonlinear_input_data(problem)
 
