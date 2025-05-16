@@ -39,4 +39,10 @@ def get_nonlinear_input_data(problem):
     node_displacements_txt = path + problem + "_displacements.txt"
     displacements = np.loadtxt(node_displacements_txt, delimiter = ",")
 
-    return (node_list, boundary_conditions, element_list, external_loads, displacements)
+    # ----------------------------------------------------------------------------
+    # MATERIAL PROPERTIES E, A
+    # ----------------------------------------------------------------------------
+    material_properties_txt = path + problem + "_material_properties.txt"
+    material_properties = np.loadtxt(material_properties_txt, delimiter = ",")
+
+    return (node_list, boundary_conditions, element_list, external_loads, displacements, material_properties)

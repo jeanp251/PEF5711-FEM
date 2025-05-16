@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def get_internal_forces(ENL, node_list, element_list, E, A):
+def get_internal_forces(ENL, node_list, element_list, material_properties):
 
     number_elements = np.size(element_list, 0)
     problem_dimension = np.size(node_list, 1)
@@ -11,7 +11,12 @@ def get_internal_forces(ENL, node_list, element_list, E, A):
     node_list_end = node_list + node_displacements
 
     internal_forces = np.zeros(number_elements)
+
+    # Iterating over each element
     for i in range(number_elements):
+        
+        E, A = material_properties[i, :]
+
         node_i = element_list[i, 0]
         node_j = element_list[i, 1]
         # Reference Configuration

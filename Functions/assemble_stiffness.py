@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def assemble_stiffness(ENL, element_list, node_list, E, A):
+def assemble_stiffness(ENL, element_list, node_list, material_properties):
 
     problem_dimension = np.size(node_list, 1)
     number_nodes = np.size(node_list, 0)
@@ -10,8 +10,9 @@ def assemble_stiffness(ENL, element_list, node_list, E, A):
 
     K = np.zeros([number_nodes * problem_dimension, number_nodes * problem_dimension])
 
+    # Iterating over each element
     for i in range(0, number_elements):
-
+        E, A = material_properties[i, :]
         nodes = element_list[i, 0:problem_dimension]
         k_contribution = __element_stiffness(nodes, ENL, E, A)
         

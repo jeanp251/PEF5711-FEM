@@ -4,12 +4,10 @@ import Functions
 import Posprocess
 
 if __name__ == "__main__":
+    
     problem = "example-2"
-
-    E = 205000e6 # [Pa]
-    A = 12.54e-4 # [m^2] 
-
-    (node_list, boundary_conditions, element_list, external_loads, displacements) = Preprocess.get_nonlinear_input_data(problem)
+ 
+    (node_list, boundary_conditions, element_list, external_loads, displacements, material_properties) = Preprocess.get_nonlinear_input_data(problem)
 
     Preprocess.pre_process(node_list, boundary_conditions, element_list, external_loads)
 
@@ -18,7 +16,7 @@ if __name__ == "__main__":
     (ENL, DOFs, DOCs) = Functions.assign_boundary_conditions(node_list, ENL)
 
     # Linear Approximation
-    K = Functions.assemble_stiffness(ENL, element_list, node_list, E, A)
+    K = Functions.assemble_stiffness(ENL, element_list, node_list, material_properties)
 
     (F_u, U_u) = Functions.solve_system(ENL, K, external_loads, displacements, node_list, DOFs, DOCs)
 
@@ -35,7 +33,7 @@ if __name__ == "__main__":
         print(counter, "-th Iteration cycle")
         print("-" * 25)
 
-        St, f = Functions.assemble_tangent_stiffness(ENL, element_list, node_list, E, A)
+        St, f = Functions.assemble_tangent_stiffness(ENL, element_list, node_list, material_properties)
 
         delta_U = Functions.get_unbalanced_joint_force(node_list, ENL, f)
 
@@ -64,7 +62,7 @@ if __name__ == "__main__":
         if counter >= max_iter:
             print("Not convergerd! after ", max_iter, " iterations.")
 
-    f, Q = Functions.get_nonlinear_results(ENL, element_list, node_list, E, A)
+    f, Q = Functions.get_nonlinear_results(ENL, element_list, node_list, material_properties)
 
     ENL = Functions.update_reactions_ENL(ENL, f[DOFs:DOFs + DOCs], node_list)
 
@@ -72,7 +70,10 @@ if __name__ == "__main__":
     Posprocess.plot_deformation_truss(ENL, node_list, element_list, scale_factor)
     Posprocess.plot_deformation_colorbar_truss(ENL, node_list, element_list, scale_factor)
 
+    np.set_printoptions(precision = 3, suppress = True)
     print("Reactions")
     print(f[DOFs:DOFs + DOCs])
     print("Element Internal Forces")
     print(Q)
+    print('Node Displacements [cm]')
+    print(ENL[:, 8:10]*100)

@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def get_nonlinear_results(ENL, element_list, node_list, E, A):
+def get_nonlinear_results(ENL, element_list, node_list, material_properties):
 
     # Get final reaction configuration after the Newton-Raphson method
 
@@ -15,7 +15,7 @@ def get_nonlinear_results(ENL, element_list, node_list, E, A):
 
     # Iterating over each element
     for i in range(0, number_elements):
-
+        E, A = material_properties[i, :]
         nodes = element_list[i, :]
         F_contribution, Q[i] = __element_nonlinear_force(nodes, ENL, E, A, problem_dimension)
 
