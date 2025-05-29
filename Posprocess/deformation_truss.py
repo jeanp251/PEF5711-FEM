@@ -7,6 +7,9 @@ def plot_deformation_truss(ENL, node_list, element_list, scale_factor):
     problem_dimension = np.size(node_list, 1)
     number_elements = np.size(element_list, 0)
 
+    label_fontsize = 15
+    annotate_fontsize = 12
+
     # First we need to get a reference dimension to plot all the stuff in proportion to this
     x_min = np.min(node_list[:, 0])
     y_min = np.min(node_list[:, 1])
@@ -38,7 +41,8 @@ def plot_deformation_truss(ENL, node_list, element_list, scale_factor):
     x_end = x_ini + node_displacements_scaled[:, 0]
     y_end = y_ini + node_displacements_scaled[:, 1]
 
-    fig, ax = plt.subplots(figsize = (10, 10))
+    fig, ax = plt.subplots(figsize = (20, 8)) # Width, Height
+    # fig, ax = plt.subplots(figsize = (8, 20)) # Width, Height For Buckling Example
 
     for i in range(number_elements):
         node_i = element_list[i, 0]
@@ -130,8 +134,8 @@ def plot_deformation_truss(ENL, node_list, element_list, scale_factor):
                                      color = 'red',
                                      length_includes_head = True)
 
-    ax.set_xlabel("x [m]")
-    ax.set_ylabel("y [m]")
+    ax.set_xlabel("x [m]", fontsize = label_fontsize)
+    ax.set_ylabel("y [m]", fontsize = label_fontsize)
     fig_save_name = "./Fig/deformation.pdf"
     plt.savefig(fig_save_name, bbox_inches = "tight")
     plt.show()

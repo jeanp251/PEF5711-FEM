@@ -5,7 +5,7 @@ import Posprocess
 
 if __name__ == "__main__":
     
-    problem = "von-mises"
+    problem = "example-2"
  
     (node_list, boundary_conditions, element_list, external_loads, displacements, material_properties) = Preprocess.get_nonlinear_input_data(problem)
 

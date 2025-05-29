@@ -8,6 +8,9 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
     number_nodes = np.size(node_list, 0)
     number_elements = np.size(element_list, 0)
 
+    label_fontsize = 15
+    annotate_fontsize = 12
+
     # FIRST WE NEED TO GET A REFERENCE DIMENSION TO PLOT ALL THE STUFF IN
     # PROPORTION TO THIS MEASURE
     x_min = np.min(node_list[:, 0])
@@ -20,7 +23,8 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
     # Width of the Force Arrows
     arrow_width = 5.657e-3 * prop_dimension
 
-    fig, ax = plt.subplots(figsize = (10, 10))
+    fig, ax = plt.subplots(figsize = (20, 8)) # Width, Height
+    # fig, ax = plt.subplots(figsize = (8, 20)) # Width, Height For buckling example
 
     # PLOT NODES
     for i in range(number_nodes):
@@ -38,7 +42,8 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
         
         ax.annotate(str(i + 1), 
                     xy = (x_node, y_node),
-                    xytext = (x_node + 7e-3 * prop_dimension, y_node + 7e-3 * prop_dimension))
+                    xytext = (x_node + 7e-3 * prop_dimension, y_node + 7e-3 * prop_dimension),
+                    fontsize = annotate_fontsize)
     
         # PLOT NODAL FORCES
         for j in range(problem_dimension):
@@ -161,10 +166,11 @@ def pre_process(node_list, boundary_conditions, element_list, external_loads):
                 yg, 
                 str(i + 1), 
                 color = 'blue', 
-                bbox = dict(facecolor = 'white', edgecolor = 'blue'))
+                bbox = dict(facecolor = 'white', edgecolor = 'blue'),
+                fontsize = annotate_fontsize)
         
-    ax.set_xlabel("x [m]")
-    ax.set_ylabel("y [m]")
+    ax.set_xlabel("x [m]", fontsize = label_fontsize)
+    ax.set_ylabel("y [m]", fontsize = label_fontsize)
     fig_save_name = "./Fig/pre_process.pdf"
     plt.savefig(fig_save_name, bbox_inches = 'tight')
     plt.show()
